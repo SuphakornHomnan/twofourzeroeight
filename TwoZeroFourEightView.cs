@@ -44,7 +44,7 @@ namespace twozerofoureight
                     l.BackColor = Color.Gray;
                     break;
                 case 2:
-                    l.BackColor = Color.DarkGray;
+                    l.BackColor = Color.HotPink;
                     break;
                 case 4:
                     l.BackColor = Color.Orange;
@@ -52,8 +52,23 @@ namespace twozerofoureight
                 case 8:
                     l.BackColor = Color.Red;
                     break;
-                default:
+                case 16:
                     l.BackColor = Color.Green;
+                    break;
+                case 32:
+                    l.BackColor = Color.Violet;
+                    break;
+                case 64:
+                    l.BackColor = Color.IndianRed;
+                    break;
+                case 128:
+                    l.BackColor = Color.CadetBlue;
+                    break;
+                case 256:
+                    l.BackColor = Color.Salmon;
+                    break;
+                default:
+                    l.BackColor = Color.Yellow;
                     break;
             }
         }
@@ -97,5 +112,9 @@ namespace twozerofoureight
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
 
+        private void lbl00_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
