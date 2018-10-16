@@ -10,9 +10,9 @@ namespace twozerofoureight
     {
         protected int boardSize; // default is 4
         protected int[,] board;
-        
+        protected string status=" ";
         protected Random rand;
-
+        public int score = 0;
         public TwoZeroFourEightModel() : this(4)
         {
             // default board size is 4 
@@ -23,6 +23,43 @@ namespace twozerofoureight
             return board;
         }
 
+        public string GetStatus()
+        {
+           
+            return status; 
+        }
+
+        public string GetScore()
+        {
+            return score.ToString();
+        }
+        public bool GetOver()
+        {
+            var range = Enumerable.Range(0, boardSize);
+            foreach (int i in range)
+            {
+                foreach(int j in range)
+                {
+                    try
+                    {
+                        if (board[i, j] == 0)
+                        {
+                            return false;
+                        }
+                        if (board[i,j]==board[i-1,j]||board[i,j]==board[i,j-1]||board[i,j]==board[i+1,j]||board[i,j]==board[i,j+1])
+                        {
+                            return false;
+                        }
+                        
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        //do nothing
+                    }
+                }
+            }
+            return true;
+        }
         public TwoZeroFourEightModel(int size)
         {
             boardSize = size;
@@ -40,27 +77,29 @@ namespace twozerofoureight
 
         private int[,] Random(int[,] input) 
         {
-            int count = 0;
-            while (true)
+            var range = Enumerable.Range(0,boardSize);
+            foreach (int i in range)
             {
-                int x = rand.Next(boardSize);
-                int y = rand.Next(boardSize);
-                
-                if (board[x, y] == 0)
+                foreach (int j in range)
                 {
-                    board[x, y] = 2;
-                    break;
-                }
-                else if(board[x,y] != 0)
-                {
-                    count++;
-                    if (count == 16)
+                    if (board[i, j] == 0)
                     {
-                        break;
+                        while (true)
+                        {
+                            int x = rand.Next(boardSize);
+                            int y = rand.Next(boardSize);
+
+                            if (board[x, y] == 0)
+                            {
+                                board[x, y] = 2;
+                                break;
+                            }
+                        }
+                        return input;
                     }
+                    
                 }
             }
-            
             return input;
         }
 
@@ -94,6 +133,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }
@@ -146,6 +186,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }
@@ -200,6 +241,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }
@@ -251,6 +293,7 @@ namespace twozerofoureight
                     if (j > 0 && buffer[j] != 0 && buffer[j] == buffer[j - 1])
                     {
                         buffer[j - 1] *= 2;
+                        score += buffer[j - 1];
                         buffer[j] = 0;
                     }
                 }

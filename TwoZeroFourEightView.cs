@@ -23,11 +23,22 @@ namespace twozerofoureight
             controller = new TwoZeroFourEightController();
             controller.AddModel(model);
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+
+            
+
         }
 
         public void Notify(Model m)
         {
             UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
+            label2.Text = ((TwoZeroFourEightModel)m).GetScore();
+            
+            if (((TwoZeroFourEightModel)m).GetOver())
+            {
+                label3.Text = "Gameover!";
+            }
+            
+
         }
 
         private void UpdateTile(Label l, int i)
@@ -116,5 +127,26 @@ namespace twozerofoureight
         {
 
         }
+
+        private void keyboard(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    controller.ActionPerformed(TwoZeroFourEightController.UP);
+                    break;
+                case Keys.Down:
+                    controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+                    break;
+                case Keys.Left:
+                    controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+                    break;
+                case Keys.Right:
+                    controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
+                    break;
+            }
+        }
     }
-}
+
+    }
+
